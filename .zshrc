@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # Kiro CLI pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
@@ -19,11 +18,6 @@ else
 fi
 
 export EXPO_TOKEN=6A_uE5PEfDeUzRgX-Su7cd6v_Et7yegVxgcqdZPh 
-=======
-# CodeWhisperer pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh"
-
->>>>>>> 23b003028a22e7bca03318431ca7ee40bdf1d5b2
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export GPG_TTY=$(tty)
@@ -36,7 +30,6 @@ function ghpr() {
     xargs gh pr checkout
 }
 
-<<<<<<< HEAD
 renameGit () {
   git mv $1 tempname && git mv tempname $2 
 }
@@ -54,8 +47,6 @@ alias fusion='npx builder.io@"/users/samijaber/code/work/ai-services/dist/dev-to
 bindkey '^[[1;3D' backward-word
 bindkey '^[[1;3C' forward-word
 
-=======
->>>>>>> 23b003028a22e7bca03318431ca7ee40bdf1d5b2
 # https://github.com/puppeteer/puppeteer/issues/6622#issuecomment-787912758
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=$(which chromium)
@@ -105,11 +96,7 @@ ENABLE_CORRECTION="false"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 #plugins=(python postgres pipenv terraform git brew node npm yarn gem rails ruby bundler rake asdf)
-<<<<<<< HEAD
 plugins=(git brew asdf)
-=======
-plugins=(postgres git brew node npm yarn asdf)
->>>>>>> 23b003028a22e7bca03318431ca7ee40bdf1d5b2
 
 # User configuration
 
@@ -182,7 +169,6 @@ export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 eval "$(direnv hook zsh)"
 
-<<<<<<< HEAD
 # pnpm
 export PNPM_HOME="/Users/samijaber/Library/pnpm"
 case ":$PATH:" in
@@ -223,7 +209,3 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
-=======
-# CodeWhisperer post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
->>>>>>> 23b003028a22e7bca03318431ca7ee40bdf1d5b2
