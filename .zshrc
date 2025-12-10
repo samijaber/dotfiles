@@ -1,18 +1,51 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+
+# zmodload zsh/zprof
+
+# Top of .zshrc
+DISABLE_AUTO_UPDATE="true"
+DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_COMPFIX="true"
+
+# Smarter completion initialization
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
+
+export EXPO_TOKEN=6A_uE5PEfDeUzRgX-Su7cd6v_Et7yegVxgcqdZPh 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+export GPG_TTY=$(tty)
+
+function ghpr() {
+  gh pr list --limit 100 --json number,title,updatedAt,author --template \
+    '{{range .}}{{tablerow .number .title .author.name (timeago .updatedAt)}}{{end}}' |
+    fzf --height 25% --reverse |
+    cut -f1 -d ' ' |
+    xargs gh pr checkout
+}
 
 renameGit () {
   git mv $1 tempname && git mv tempname $2 
 }
 
+export SKILL_ISSUE="not in this house."
+
 alias pr='gh pr view -w'
 alias repo='gh repo view -w'
-alias restore='git restore --source=upstream/main --staged --worktree --'
+alias restore='git restore --source=origin --staged --worktree --'
 alias get='gl upstream main'
 alias rose='arch -x86_64 /bin/zsh'
 alias ls='colorls'
+alias fusion='npx builder.io@"/users/samijaber/code/work/ai-services/dist/dev-tools" launch'
+
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;3C' forward-word
 
 # https://github.com/puppeteer/puppeteer/issues/6622#issuecomment-787912758
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
@@ -78,7 +111,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 #plugins=(python postgres pipenv terraform git brew node npm yarn gem rails ruby bundler rake asdf)
-plugins=(postgres git brew node npm yarn asdf nx-completion)
+plugins=(git brew asdf)
 
 # User configuration
 
@@ -114,8 +147,25 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # hide gcloud version info
 SPACESHIP_GCLOUD_SHOW="false"
+SPACESHIP_PROMPT_ASYNC=false
 
-#SPACESHIP_PROMPT_ORDER=()
+
+SPACESHIP_PROMPT_ORDER=(
+  time           # Time stamps section
+  user           # Username section
+  dir            # Current directory section
+  host           # Hostname section
+  git            # Git section (git_branch + git_status)
+  package        # Package version
+  node           # Node.js section
+  gcloud         # Google Cloud Platform section
+  exec_time      # Execution time
+  line_sep       # Line break
+  jobs           # Background jobs indicator
+  exit_code      # Exit code section
+  char           # Prompt character
+)
+
 SPACESHIP_PROMPT_ADD_NEWLINE="false"
 SPACESHIP_PROMPT_SEPARATE_LINE="false"
 #SPACESHIP_CHAR_SYMBOL="\uf0e7"
@@ -161,12 +211,6 @@ alias git=hub
 
 eval "$(direnv hook zsh)"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/samijaber/software-installs/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/samijaber/software-installs/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/samijaber/software-installs/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/samijaber/software-installs/google-cloud-sdk/completion.zsh.inc'; fi
-
 # pnpm
 export PNPM_HOME="/Users/samijaber/Library/pnpm"
 case ":$PATH:" in
@@ -175,5 +219,35 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/samijaber/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/samijaber/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/samijaber/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/samijaber/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Shopify Hydrogen alias to local projects
+alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
+
+export PATH=$PATH:$HOME/.maestro/bin
+
+
+[[ -f "$HOME/fig-export/dotfiles/dotfile.zsh" ]] && builtin source "$HOME/fig-export/dotfiles/dotfile.zsh"
+
+# zprof
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/samijaber/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+# bun completions
+[ -s "/Users/samijaber/.bun/_bun" ] && source "/Users/samijaber/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
