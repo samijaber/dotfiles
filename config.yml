@@ -1,0 +1,38 @@
+gui:
+  skipDiscardChangeWarning: true
+  overrideGpg: true
+customCommands:
+  - key: "G"
+    command: "git pull upstream main"
+    context: "global"
+    loadingText: "fetching from upstream"
+  - key: "F"
+    command: "git commit --message \"$(echo -e \"\U0001FAA9\n\U0001F479\n\U0001F3C3\" | shuf -n 1)\" && git push"
+    context: "global"
+    loadingText: "yeeting..."
+  - key: <c-f>
+    description: Pick AI commit (no verify)
+    command: aicommit2 --no-verify -y
+    context: files
+    output: terminal
+  - key: "C"
+    context: "localBranches"
+    description: "Checkout branch using search"
+    prompts:
+      - type: "input"
+        title: "Branch Name"
+        key: BranchName
+        suggestions:
+          preset: "remoteBranches"
+    command: "git checkout {{ .Form.BranchName }}"
+#   description: Pick AI commit (copy)
+#   command: aicommit2 -c && pbpaste > .git/LAZYGIT_PENDING_COMMIT
+#   context: files
+#   subprocess: true
+#   showOutput: true
+
+# - key: <c-g>
+#   description: Create PR
+#   command: gh prai
+#   subprocess: true
+#   showOutput: true
