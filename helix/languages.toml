@@ -1,0 +1,2 @@
+[language-server.typescript-language-server.config]
+maxTsServerMemory = 8192

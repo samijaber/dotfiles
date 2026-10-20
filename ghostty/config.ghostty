@@ -1,0 +1,5 @@
+keybind = alt+backspace=text:\x1b\x7f
+keybind = ctrl+backspace=text:\x17
+keybind = super+backspace=text:\x15
+macos-option-as-alt = left
+mouse-shift-capture = never
