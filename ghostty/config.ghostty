@@ -6,3 +6,5 @@ mouse-shift-capture = never
 env = EDITOR=hx
 env = VISUAL=hx
 keybind = super+p=text:\x1b\x10
+keybind = super+[=esc:{
+keybind = super+]=esc:}

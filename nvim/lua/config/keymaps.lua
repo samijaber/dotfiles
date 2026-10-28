@@ -1,6 +1,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
+vim.keymap.set("n", "<M-{>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<M-}>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+
 vim.keymap.set({ "n", "i" }, "<C-M-p>", function()
   Snacks.picker.commands()
 end, { desc = "Command palette" })
